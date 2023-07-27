@@ -44,13 +44,4 @@ export default StyleSheet.create({
   bold: {
     fontWeight: fonts.weight.bold,
   },
-  comment: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  commentText: {
-    flex: 1,
-    color: colors.white,
-    lineHeight: 18,
-  },
 });

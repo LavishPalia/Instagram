@@ -7,25 +7,31 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import styles from './styles';
 import colors from '../../theme/color';
+import {IPost} from '../../types/models';
+import Comment from '../Comment/';
 
-const FeedPost = () => {
+interface IFeedPost {
+  post: IPost;
+}
+
+const FeedPost = ({post}: IFeedPost) => {
   return (
     <View style={styles.post}>
       {/* Header     */}
       <View style={styles.header}>
         <Image
           source={{
-            uri: 'https://picsum.photos/id/7/4728/3168',
+            uri: post.user.image,
           }}
           style={styles.userAvatar}
         />
-        <Text style={styles.userName}>LavishPalia</Text>
+        <Text style={styles.userName}>{post.user.username}</Text>
         <Entypo name="dots-three-vertical" size={16} style={styles.threeDots} />
       </View>
       {/* Content */}
       <Image
         source={{
-          uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg',
+          uri: post.image,
         }}
         style={styles.image}
       />
@@ -63,34 +69,24 @@ const FeedPost = () => {
         <Text style={styles.text}>
           Liked by
           <Text style={styles.bold}> Chirag Kedia </Text> and{' '}
-          <Text style={styles.bold}> 99 others</Text>
+          <Text style={styles.bold}> {post.nofLikes} others</Text>
         </Text>
 
         {/* Post description */}
         <Text style={styles.text}>
-          <Text style={styles.bold}>Chirag Kedia</Text> Lorem, ipsum dolor sit
-          amet consectetur adipisicing elit. Odit corporis eaque quasi quaerat
-          maxime tempora ad optio? Enim repellat incidunt adipisci harum, fuga
-          beatae blanditiis? Beatae repellendus ad enim hic?
+          <Text style={styles.bold}>{post.user.username}</Text>{' '}
+          {post.description}
         </Text>
 
         {/* Comments */}
-        <Text>View all 101 comments</Text>
-        <View style={styles.comment}>
-          <Text style={styles.commentText}>
-            <Text style={styles.bold}>Chirag Kedia</Text> Lorem, ipsum dolor sit
-            amet consectetur adipisicing elit.
-          </Text>
-          <AntDesign
-            name={'hearto'}
-            size={14}
-            style={styles.icon}
-            color={colors.white}
-          />
-        </View>
+        <Text>View all {post.nofComments} comments</Text>
+
+        {post.comments.map(comment => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
 
         {/* Posted date */}
-        <Text>22 November, 2022</Text>
+        <Text>{post.createdAt}</Text>
       </View>
     </View>
   );
