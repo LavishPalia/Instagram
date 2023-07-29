@@ -6,6 +6,7 @@ import {
   useWindowDimensions,
   ViewToken,
   ViewabilityConfig,
+  Text,
 } from 'react-native';
 
 import colors from '../../theme/color';
@@ -36,6 +37,24 @@ const Carousel = ({images, onDoublePress = () => {}}: ICarousel) => {
 
   return (
     <View>
+      <View
+        style={{
+          backgroundColor: colors.black,
+          position: 'absolute',
+          zIndex: 2,
+          top: 5,
+          right: 5,
+          borderRadius: 15,
+        }}>
+        <Text
+          style={{
+            color: colors.white,
+            marginHorizontal: 15,
+            marginVertical: 5,
+          }}>
+          {activeImageIndex + 1}/{images.length}
+        </Text>
+      </View>
       <FlatList
         data={images}
         renderItem={({item}) => (
