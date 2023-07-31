@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 5,
     borderTopWidth: 1,
-    borderColor: '#3f3e3e',
+    borderColor: colors.border,
     alignItems: 'flex-end',
   },
   image: {
