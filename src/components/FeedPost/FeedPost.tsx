@@ -12,6 +12,14 @@ import Comment from '../Comment/';
 import DoublePressable from '../DoublePressable';
 import Carousel from '../Carousel';
 import VideoPlayer from '../VideoPlayer/';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../navigation/index';
+
+type HomeScreenNavigationProps = NativeStackNavigationProp<
+  RootStackParamList,
+  'Feed'
+>;
 
 interface IFeedPost {
   post: IPost;
@@ -21,6 +29,12 @@ interface IFeedPost {
 const FeedPost = ({post, isVisible}: IFeedPost) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+
+  const navigation = useNavigation<HomeScreenNavigationProps>();
+
+  const moveToUser = () => {
+    navigation.navigate('UserProfile', {userId: post.user.id});
+  };
 
   const toggleDescriptionExpanded = () => {
     setIsDescriptionExpanded(prevState => !prevState); //** updating isDescriptionExpanded based on previous state value
@@ -62,7 +76,9 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
           }}
           style={styles.userAvatar}
         />
-        <Text style={styles.userName}>{post.user.username}</Text>
+        <Text onPress={moveToUser} style={styles.userName}>
+          {post.user.username}
+        </Text>
         <Entypo name="dots-three-vertical" size={16} style={styles.threeDots} />
       </View>
       {/* Content */}
