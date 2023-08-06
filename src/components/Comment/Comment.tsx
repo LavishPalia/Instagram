@@ -8,7 +8,7 @@ import fonts from '../../theme/fonts';
 
 interface ICommentProps {
   comment: IComment;
-  includeDetails: boolean;
+  includeDetails?: boolean;
 }
 
 const Comment = ({comment, includeDetails = false}: ICommentProps) => {
