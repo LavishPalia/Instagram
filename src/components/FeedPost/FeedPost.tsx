@@ -17,9 +17,9 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 type RootStackParamList = {
   Feed: undefined;
-  UserProfile: undefined;
+  UserProfile: {userName: string};
 };
-type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+type NavigationProps = NativeStackNavigationProp<RootStackParamList, 'Feed'>;
 
 interface IFeedPost {
   post: IPost;
@@ -40,7 +40,9 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   };
 
   const onNavigateToUserProfile = () => {
-    navigation.navigate('UserProfile');
+    navigation.navigate('UserProfile', {
+      userName: post.user.username,
+    });
   };
 
   let content = null;
