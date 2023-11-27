@@ -13,6 +13,14 @@ import DoublePressable from '../DoublePressable';
 import Carousel from '../Carousel';
 import VideoPlayer from '../VideoPlayer/';
 
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+type RootStackParamList = {
+  Feed: undefined;
+  UserProfile: undefined;
+};
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+
 interface IFeedPost {
   post: IPost;
   isVisible: boolean;
@@ -21,6 +29,7 @@ interface IFeedPost {
 const FeedPost = ({post, isVisible}: IFeedPost) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const navigation = useNavigation<NavigationProps>();
 
   const toggleDescriptionExpanded = () => {
     setIsDescriptionExpanded(prevState => !prevState); //** updating isDescriptionExpanded based on previous state value
@@ -28,6 +37,10 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
 
   const toggleLike = () => {
     setIsLiked(prevState => !prevState); //** updating isLiked based on previous state value
+  };
+
+  const onNavigateToUserProfile = () => {
+    navigation.navigate('UserProfile');
   };
 
   let content = null;
@@ -62,7 +75,9 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
           }}
           style={styles.userAvatar}
         />
-        <Text style={styles.userName}>{post.user.username}</Text>
+        <Text style={styles.userName} onPress={onNavigateToUserProfile}>
+          {post.user.username}
+        </Text>
         <Entypo name="dots-three-vertical" size={16} style={styles.threeDots} />
       </View>
       {/* Content */}
