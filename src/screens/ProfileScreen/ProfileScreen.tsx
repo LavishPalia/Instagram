@@ -17,9 +17,9 @@ type ProfileNavigationProp = NativeStackNavigationProp<ParamList>;
 const ProfileScreen = () => {
   const route = useRoute<ProfileRouteProp>();
   const navigation = useNavigation<ProfileNavigationProp>();
-  console.log(route.params);
+  // console.log(route.params);
 
-  const username = route.params.userName;
+  const username = route.params?.userName;
 
   useEffect(() => {
     navigation.setOptions({title: username});
