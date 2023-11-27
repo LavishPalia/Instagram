@@ -7,8 +7,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import colors from '../theme/color';
 import HomeStackNavigator from './HomeStackNavigator';
 import ProfileStackNavigator from './ProfileStackNavigator';
+import {BottomTabParamList} from './types';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabNavigator = () => {
   return (

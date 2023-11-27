@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import colors from '../theme/color';
 import BottomTabNavigator from './BottomTabNavigator';
 import CommentsScreen from '../screens/CommentsScreen';
-import EditProfileScreen from '../screens/EditProfileScreen';
+import {RootStackParamList} from './types';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -14,7 +14,7 @@ const MyTheme = {
   },
 };
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
   return (

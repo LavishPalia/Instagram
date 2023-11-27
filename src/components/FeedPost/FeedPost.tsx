@@ -14,15 +14,7 @@ import Carousel from '../Carousel';
 import VideoPlayer from '../VideoPlayer/';
 
 import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-
-type FeedStackParamList = {
-  Feed: undefined;
-  UserProfile: {userName: string};
-  Comments: undefined;
-};
-type FeedNavigationProps = NativeStackNavigationProp<FeedStackParamList, 'Feed'>;
-
+import {FeedNavigationProp} from '../../navigation/types';
 interface IFeedPost {
   post: IPost;
   isVisible: boolean;
@@ -31,7 +23,7 @@ interface IFeedPost {
 const FeedPost = ({post, isVisible}: IFeedPost) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const navigation = useNavigation<FeedNavigationProps>();
+  const navigation = useNavigation<FeedNavigationProp>();
 
   const toggleDescriptionExpanded = () => {
     setIsDescriptionExpanded(prevState => !prevState); //** updating isDescriptionExpanded based on previous state value

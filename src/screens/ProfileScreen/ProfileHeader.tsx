@@ -7,16 +7,16 @@ import colors from '../../theme/color';
 import fonts from '../../theme/fonts';
 
 import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {ProfileNavigationProp} from '../../navigation/types';
 
-type ProfileStackParamList = {
-  'Edit Profile': undefined;
-};
+// type ProfileStackParamList = {
+//   'Edit Profile': undefined;
+// };
 
-type ProfileNavigationProp = NativeStackNavigationProp<
-  ProfileStackParamList,
-  'Edit Profile'
->;
+// type ProfileNavigationProp = NativeStackNavigationProp<
+//   ProfileStackParamList,
+//   'Edit Profile'
+// >;
 
 const ProfileHeader = () => {
   const navigation = useNavigation<ProfileNavigationProp>();

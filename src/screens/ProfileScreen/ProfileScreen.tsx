@@ -5,18 +5,18 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import user from '../../assets/data/user.json';
 import ProfileHeader from './ProfileHeader';
 import FeedGridView from '../../components/FeedGridView/FeedGridView';
-
-type ParamList = {
-  Feed: undefined;
-  UserProfile: {userName: string};
-};
-
-type ProfileRouteProp = RouteProp<ParamList, 'UserProfile'>;
-type ProfileNavigationProp = NativeStackNavigationProp<ParamList>;
+import {
+  UserProfileNavigationProp,
+  UserProfileRouteProp,
+  MyProfileNavigationProp,
+  MyProfileRouteProp,
+} from '../../navigation/types';
 
 const ProfileScreen = () => {
-  const route = useRoute<ProfileRouteProp>();
-  const navigation = useNavigation<ProfileNavigationProp>();
+  const route = useRoute<UserProfileRouteProp | MyProfileRouteProp>();
+  const navigation = useNavigation<
+    UserProfileNavigationProp | MyProfileNavigationProp
+  >();
   // console.log(route.params);
 
   const username = route.params?.userName;
