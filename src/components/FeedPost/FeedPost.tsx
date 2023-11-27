@@ -15,11 +15,13 @@ import VideoPlayer from '../VideoPlayer/';
 
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-type RootStackParamList = {
+
+type FeedStackParamList = {
   Feed: undefined;
   UserProfile: {userName: string};
+  Comments: undefined;
 };
-type NavigationProps = NativeStackNavigationProp<RootStackParamList, 'Feed'>;
+type FeedNavigationProps = NativeStackNavigationProp<FeedStackParamList, 'Feed'>;
 
 interface IFeedPost {
   post: IPost;
@@ -29,7 +31,7 @@ interface IFeedPost {
 const FeedPost = ({post, isVisible}: IFeedPost) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const navigation = useNavigation<NavigationProps>();
+  const navigation = useNavigation<FeedNavigationProps>();
 
   const toggleDescriptionExpanded = () => {
     setIsDescriptionExpanded(prevState => !prevState); //** updating isDescriptionExpanded based on previous state value
@@ -43,6 +45,10 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
     navigation.navigate('UserProfile', {
       userName: post.user.username,
     });
+  };
+
+  const onNavigateToComments = () => {
+    navigation.navigate('Comments');
   };
 
   let content = null;
@@ -133,7 +139,9 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
         </Text>
 
         {/* Comments */}
-        <Text>View all {post.nofComments} comments</Text>
+        <Text onPress={onNavigateToComments}>
+          View all {post.nofComments} comments
+        </Text>
 
         {post.comments.map(comment => (
           <Comment key={comment.id} comment={comment} />

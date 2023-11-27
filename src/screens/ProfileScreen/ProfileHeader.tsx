@@ -6,7 +6,24 @@ import user from '../../assets/data/user.json';
 import colors from '../../theme/color';
 import fonts from '../../theme/fonts';
 
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+type ProfileStackParamList = {
+  'Edit Profile': undefined;
+};
+
+type ProfileNavigationProp = NativeStackNavigationProp<
+  ProfileStackParamList,
+  'Edit Profile'
+>;
+
 const ProfileHeader = () => {
+  const navigation = useNavigation<ProfileNavigationProp>();
+
+  const navigateToEditProfile = () => {
+    navigation.navigate('Edit Profile');
+  };
   return (
     <View style={styles.root}>
       <View style={styles.headerRow}>
@@ -35,10 +52,7 @@ const ProfileHeader = () => {
 
       {/* Buttons */}
       <View style={{flexDirection: 'row'}}>
-        <Button
-          text="Edit Profile"
-          onPress={() => console.warn('On Edit Profile')}
-        />
+        <Button text="Edit Profile" onPress={navigateToEditProfile} />
         <Button
           text="Share Profile"
           onPress={() => console.warn('On Share Profile')}
